@@ -1,5 +1,6 @@
 import log from './logger.js'
 import ui from './ui.js'
+import {pick} from './utils.js'
 
 function convertQueryParams(queryStringArr) {
   return queryStringArr.reduce((res, {name, value}) => {
@@ -14,16 +15,16 @@ class Analyzer {
     this.messages = []
   }
 
-  newMessage({tracker, queryParams, status}) {
+  newMessage({tracker, type, status}) {
     this.messages.push({
       tracker,
-      type: queryParams['ns_st_ad'] === 'preroll' ? 'preroll' : 'Meh',
+      type,
       status
     })
     ui(this.messages)
   }
 
-  onRequest(_request) {
+  handleRequest(_request) {
     log('onRequestFinished', _request)
     const {request, response} = _request
     const {url, queryString} = request
@@ -32,7 +33,20 @@ class Analyzer {
 
     if (url.match(/scorecardresearch/)) {
       const tracker = 'mms'
-      this.newMessage({tracker, url, queryParams, status})
+      log('Found mms')
+      const props = pick(queryParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
+      log(props)
+      const type = Object.values(props).filter(x => !!x).join(':')
+      log('Type', type)
+      this.newMessage({tracker, type, status})
+    }
+  }
+
+  onRequest(request) {
+    try {
+      this.handleRequest(request)
+    } catch (e) {
+      log('Unexpected error:', e.message, e.stack)
     }
   }
 
