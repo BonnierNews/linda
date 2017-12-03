@@ -1,0 +1,17 @@
+{
+  "name": "linda",
+  "version": "0.0.1",
+  "description": "Linda is watching!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "webpack": "^3.9.1"
+  }
+}

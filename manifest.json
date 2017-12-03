@@ -1,0 +1,20 @@
+{
+  "name": "Linda",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Linda is watching!",
+  "devtools_page": "app/devtools.html",
+  "background": {
+    "scripts": [
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+     "16": "app/images/Rails_Logo_16x16.png",
+     "48": "app/images/Rails_Logo_48x48.png",
+    "128": "app/images/Rails_Logo_128x128.png"
+  }
+}

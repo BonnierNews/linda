@@ -1,0 +1,32 @@
+parserOptions:
+    ecmaVersion: 8
+    sourceType: 'module'
+rules:
+  indent:
+    - error
+    - 2
+    - SwitchCase: 1
+  quotes:
+    - error
+    - single
+  linebreak-style:
+    - error
+    - unix
+  semi:
+    - error
+    - never
+  no-return-assign:
+    - error
+    - always
+  comma-dangle:
+    - error
+    - only-multiline
+  no-console:
+    - 0
+env:
+  es6: true
+  browser: true
+  node: true
+globals:
+  chrome: true
+extends: 'eslint:recommended'
