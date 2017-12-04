@@ -15,6 +15,11 @@ class Analyzer {
     this.messages = []
   }
 
+  reset() {
+    this.messages = []
+    updateUi(this.messages)
+  }
+
   newMessage({tracker, type, status}) {
     this.messages.push({
       tracker,
