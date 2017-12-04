@@ -1,12 +1,20 @@
 import log from './logger.js'
 import updateUi from './ui.js'
-import {pick} from './utils.js'
 
-function convertQueryParams(queryStringArr) {
-  return queryStringArr.reduce((res, {name, value}) => {
-    res[name] = value
-    return res
-  }, {})
+function pick(searchParams, keys) {
+  return keys.map(key => searchParams.get(key)).filter(x => !!x)
+}
+
+
+function getSearchParams(request) {
+  if (request.method === 'GET') {
+    return new URL(request.url).searchParams
+  }
+  if (request.postData && request.postData.text) {
+    return new URLSearchParams(request.postData.text)
+  }
+
+  return new URLSearchParams()
 }
 
 class Analyzer {
@@ -32,17 +40,23 @@ class Analyzer {
   handleRequest(_request) {
     log('onRequestFinished', _request)
     const {request, response} = _request
-    const {url, queryString} = request
-    const queryParams = convertQueryParams(queryString)
+    const url = request.url
+    const searchParams = getSearchParams(request)
     const {status} = response
 
-    if (url.match(/scorecardresearch/)) {
-      const tracker = 'mms'
-      log('Found mms')
-      const props = pick(queryParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
-      log(props)
-      const type = Object.values(props).filter(x => !!x).join(':')
-      log('Type', type)
+    if (url.match(/\.scorecardresearch\.com/)) {
+      log('DODO MMS', request)
+      const tracker = 'MMS'
+      const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
+      log('MMS', props)
+      const type = props.join(':')
+      this.newMessage({tracker, type, status})
+    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
+      log('DODO GA', request)
+      const tracker = 'GA'
+      const props = pick(searchParams, ['t', 'ec', 'ea', 'cd35', 'el'])
+      log('GA', props)
+      const type = props.join(':')
       this.newMessage({tracker, type, status})
     }
   }
