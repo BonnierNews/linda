@@ -1,37 +1,24 @@
-function makeTable(rows) {
-  function makeRows(rows) {
-    function makeRow({tracker, type, status}) {
-      return `
-      <tr>
-      <td>${tracker}</th>
-      <td>${type}</th>
-      <td>${status}</th>
-      </tr>
-      `
-    }
-    return rows.map(makeRow).join('')
-  }
+import { el, mount, list } from 'redom'
 
-  return `
-    <table>
-      <thead>
-        <tr>
-        <th>Tracker</th>
-        <th>Type</th>
-        <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${makeRows(rows)}
-      </tbody>
-    </table>
-  `
+class Td {
+  constructor () {
+    this.el = el('td')
+  }
+  update (data) {
+    this.el.textContent = data
+  }
 }
 
+const Tr = list.extend('tr', Td)
+
+const table = list('table', Tr)
+
+const app = el('div', table)
+
+mount(document.body, app)
+
 function updateUi(rows) {
-  const tableDiv = document.getElementById('requestsTable')
-  const html = makeTable(rows)
-  tableDiv.innerHTML = html
+  table.update(rows.map(o => Object.values(o)))
 }
 
 export default updateUi

@@ -1,5 +1,5 @@
 import log from './logger.js'
-import ui from './ui.js'
+import updateUi from './ui.js'
 import {pick} from './utils.js'
 
 function convertQueryParams(queryStringArr) {
@@ -21,7 +21,7 @@ class Analyzer {
       type,
       status
     })
-    ui(this.messages)
+    updateUi(this.messages)
   }
 
   handleRequest(_request) {
