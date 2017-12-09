@@ -1,5 +1,5 @@
 import log from './logger.js'
-import updateUi from './ui.js'
+import updateUi from './accordion.js'
 
 function pick(searchParams, keys) {
   return keys.map(key => searchParams.get(key)).filter(x => !!x)
@@ -28,11 +28,10 @@ class Analyzer {
     updateUi(this.messages)
   }
 
-  newMessage({tracker, type, status}) {
+  newMessage({tracker, type}) {
     this.messages.push({
-      tracker,
-      type,
-      status
+      short: tracker,
+      long: type,
     })
     updateUi(this.messages)
   }
