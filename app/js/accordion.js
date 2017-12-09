@@ -34,7 +34,7 @@ mount(document.body, accordion)
 
 function updateUi(rows) {
   //Do not show more that 250 due to performance
-  accordion.update(rows.slice(250))
+  accordion.update(rows.slice(0, 250))
 }
 
 export default updateUi
