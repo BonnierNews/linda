@@ -27,10 +27,10 @@ class Analyzer {
     updateRows(this.messages)
   }
 
-  newMessage({tracker, type}) {
+  newMessage({tracker, type, searchParams}) {
     this.messages.push({
-      short: tracker,
-      long: type,
+      short: `${tracker} ${type}`,
+      long: searchParams
     })
     updateRows(this.messages)
   }
@@ -43,19 +43,15 @@ class Analyzer {
     const {status} = response
 
     if (url.match(/\.scorecardresearch\.com/)) {
-      log('DODO MMS', request)
       const tracker = 'MMS'
       const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
-      log('MMS', props)
       const type = props.join(':')
-      this.newMessage({tracker, type, status})
+      this.newMessage({tracker, type, status, searchParams})
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
-      log('DODO GA', request)
       const tracker = 'GA'
       const props = pick(searchParams, ['t', 'ec', 'ea', 'cd35', 'el'])
-      log('GA', props)
       const type = props.join(':')
-      this.newMessage({tracker, type, status})
+      this.newMessage({tracker, type, status, searchParams})
     }
   }
 

@@ -1,5 +1,6 @@
 import {mount, el} from 'redom'
 import accordion from './accordion.js'
+import analyzer from './analyzer.js'
 
 const refreshCheckbox =
   el('div.form-check',
@@ -12,7 +13,13 @@ const refreshCheckbox =
       'Reload on refresh/href update'
     ))
 
+const clearBtn = el('button.btn.btn-primary', 'Clear', {
+  type: 'button',
+  onclick: () => analyzer.reset()
+})
+
 mount(document.body, refreshCheckbox)
+mount(document.body, clearBtn)
 mount(document.body, accordion)
 
 export function updateRows(rows) {

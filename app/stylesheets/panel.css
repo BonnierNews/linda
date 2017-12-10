@@ -1,0 +1,11 @@
+.card-header {
+  padding: .25rem 1.25rem;
+}
+
+.btn-primary {
+    margin-left: 50px;
+}
+
+.form-check {
+  display: inline;
+}
