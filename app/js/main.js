@@ -1,4 +1,5 @@
 import analyzer from './analyzer.js'
+import {isRefreshChecked} from './ui.js'
 
 window.addEventListener('load', () => {
   analyzer.init()
@@ -11,7 +12,9 @@ if (chrome.devtools) { // Needed to be able to local dev with mocks
 
   backgroundPageConnection.onMessage.addListener((message) => {
     if (message.type === 'reload' && message.tabId === chrome.devtools.inspectedWindow.tabId) {
-      analyzer.reset()
+      if (isRefreshChecked()) {
+        analyzer.reset()
+      }
     }
   })
 }

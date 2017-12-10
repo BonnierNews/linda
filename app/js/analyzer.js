@@ -1,10 +1,9 @@
 import log from './logger.js'
-import updateUi from './accordion.js'
+import {updateRows} from './ui.js'
 
 function pick(searchParams, keys) {
   return keys.map(key => searchParams.get(key)).filter(x => !!x)
 }
-
 
 function getSearchParams(request) {
   if (request.method === 'GET') {
@@ -25,7 +24,7 @@ class Analyzer {
 
   reset() {
     this.messages = []
-    updateUi(this.messages)
+    updateRows(this.messages)
   }
 
   newMessage({tracker, type}) {
@@ -33,7 +32,7 @@ class Analyzer {
       short: tracker,
       long: type,
     })
-    updateUi(this.messages)
+    updateRows(this.messages)
   }
 
   handleRequest(_request) {
