@@ -1,4 +1,5 @@
 import { el, list } from 'redom'
+import Table from './table.js'
 
 let index = 0
 const parentId = 'accordion'
@@ -22,7 +23,8 @@ class Card {
       ),
       this.collapse =
         el(`div#${collapseIndex}.collapse`, {role: 'tabpanel', 'aria-labelledby': cardHeaderIndex, 'data-parent': `#${parentId}`},
-          this.cardBody = el('div.card-body')
+          el('div.card-body',
+            this.cardBodyTable = new Table())
         )
     )
 
@@ -31,7 +33,7 @@ class Card {
 
   update ({short, long}) {
     this.textLink.textContent = short
-    this.cardBody.textContent = long
+    this.cardBodyTable.update(long)
   }
 }
 

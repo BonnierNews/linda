@@ -30,7 +30,7 @@ class Analyzer {
   newMessage({tracker, type, searchParams}) {
     this.messages.push({
       short: `${tracker} ${type}`,
-      long: searchParams
+      long: Array.from(searchParams.entries())
     })
     updateRows(this.messages)
   }
