@@ -11,7 +11,7 @@ class Card {
 
     this.el = el('div.card',
       this.header = el('div.card-header', { role: 'tab', id: cardHeaderIndex},
-        el('h5.mb-0',
+        el('h6.mb-0',
           this.textLink =
             el('a',
               {'data-toggle':'collapse',
