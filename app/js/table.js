@@ -13,8 +13,8 @@ class Td {
 const Tr = list.extend('tr', Td)
 
 class Table {
-  constructor() {
-    this.el = list('table', Tr)
+  constructor(opts) {
+    this.el = list(el('table', opts), Tr)
   }
   update(rows) {
     this.el.update(rows)

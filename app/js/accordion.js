@@ -24,7 +24,7 @@ class Card {
       this.collapse =
         el(`div#${collapseIndex}.collapse`, {role: 'tabpanel', 'aria-labelledby': cardHeaderIndex, 'data-parent': `#${parentId}`},
           el('div.card-body',
-            this.cardBodyTable = new Table())
+            this.cardBodyTable = new Table({class: 'query-table'}))
         )
     )
 
