@@ -75,7 +75,7 @@ class Analyzer {
     const requests = [{
       request: {
         method: 'GET',
-        url: 'http://b.scorecardresearch.com/p?c1=2&c2=24459705&ns_site=total&ns_st_ev=play&ns_st_ad=preroll',
+        url: 'http://b.scorecardresearch.com/p?c1=2&c2=24459705&ns_site=total&ns_st_ev=play&ns_st_ad=preroll&c7=https%3A%2F%2Fwww.expressen.se%2Ftvspelare%2Fvideo%2Ftv%2Fnyheter%2Fde-kraver-att-arbetsgivare-och-facket-ska-ta-det-har-pa-allvar%2F%3Fautoplay%3Dtrue%26startvolume%3D0%26starttime%3D0',
       },
       response: {
         status: 200

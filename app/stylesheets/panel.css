@@ -10,7 +10,7 @@
 .card-body {
   padding: 5px 10px;
   font-size: 0.8em;
-  max-height: 300px;
+  max-height: 300px; /*height and overflow provides the scrollable table*/
   overflow: scroll;
 }
 
