@@ -14,10 +14,10 @@
   overflow: scroll;
 }
 
-.btn-primary {
-    margin-left: 50px;
+#ClearBtn {
+  margin-left: 50px;
 }
 
-.form-check {
-  display: inline;
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
 }

@@ -20,19 +20,67 @@ class Analyzer {
   constructor() {
     this.onRequest = this.onRequest.bind(this)
     this.messages = []
+    this.filterText = ''
+    this.typesToFilter = new Set()
+  }
+
+  updateUi() {
+    updateRows(this.filterMessages())
+  }
+
+  filterMessages() {
+    function filterByType(messages, typesToFilter) {
+      if (typesToFilter.size) {
+        return messages.filter(({type}) => !typesToFilter.has(type))
+      }
+      return messages
+    }
+
+    function filterByText(messages, text) {
+      if (!text) {
+        return messages
+      }
+
+      const re = new RegExp(text, 'i')
+      return messages.filter((message) => {
+        return message.type.match(re) ||
+          message.searchParamsList.some((searchParamPair) => searchParamPair.join('=').match(re))
+      })
+    }
+
+    const messagesFilteredByType = filterByType(this.messages, this.typesToFilter)
+    return filterByText(messagesFilteredByType, this.filterText)
   }
 
   reset() {
     this.messages = []
-    updateRows(this.messages)
+    this.updateUi()
   }
 
-  newMessage({tracker, type, searchParams}) {
+  setFilterText(value) {
+    this.filterText = value
+    this.updateUi()
+  }
+
+  filterType({target}) {
+    const {name, checked} = target
+    if (checked) {
+      this.typesToFilter.delete(name)
+    } else {
+      this.typesToFilter.add(name)
+    }
+    this.updateUi()
+  }
+
+  newMessage({type, summary, searchParamsList}) {
     this.messages.push({
-      short: `${tracker} ${type}`,
-      long: Array.from(searchParams.entries())
+      type,
+      searchParamsList,
+      // short and long processed here to send to accordion ui directly
+      summary,
+      details: searchParamsList
     })
-    updateRows(this.messages)
+    this.updateUi()
   }
 
   handleRequest(_request) {
@@ -40,18 +88,19 @@ class Analyzer {
     const {request, response} = _request
     const url = request.url
     const searchParams = getSearchParams(request)
+    const searchParamsList = Array.from(searchParams.entries())
     const {status} = response
 
     if (url.match(/\.scorecardresearch\.com/)) {
-      const tracker = 'MMS'
+      const type = 'MMS'
       const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
-      const type = props.join(':')
-      this.newMessage({tracker, type, status, searchParams})
+      const summary = `${type} ${props.join(':')}`
+      this.newMessage({type, summary, status, searchParamsList})
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
-      const tracker = 'GA'
+      const type = 'GA'
       const props = pick(searchParams, ['t', 'ec', 'ea', 'cd35', 'el'])
-      const type = props.join(':')
-      this.newMessage({tracker, type, status, searchParams})
+      const summary = `${type} ${props.join(':')}`
+      this.newMessage({type, summary, status, searchParamsList})
     }
   }
 
@@ -72,40 +121,10 @@ class Analyzer {
   }
 
   _mock() {
-    const requests = [{
-      request: {
-        method: 'GET',
-        url: 'http://b.scorecardresearch.com/p?c1=2&c2=24459705&ns_site=total&ns_st_ev=play&ns_st_ad=preroll&c7=https%3A%2F%2Fwww.expressen.se%2Ftvspelare%2Fvideo%2Ftv%2Fnyheter%2Fde-kraver-att-arbetsgivare-och-facket-ska-ta-det-har-pa-allvar%2F%3Fautoplay%3Dtrue%26startvolume%3D0%26starttime%3D0',
-      },
-      response: {
-        status: 200
-      }
-    }, {
-      request: {
-        method: 'GET',
-        url: 'http://www.abc.com/xyz'
-      },
-      response: {
-        status: 200
-      }
-    }, {
-      request: {
-        method: 'POST',
-        url: 'https://www.google-analytics.com/collect',
-        postData: {
-          mimeType: 'text/plain;charset=UTF-8',
-          text: 'v=1&t=event&ni=0&ec=video&ea=pause&el=content%20pause&cd9=0&cd10=1&cd12=2017-10-14&cd13=08%3A18&cd14=oskar%20m%C3%A5nsson&cd15=fotboll&cd16=person%2Fzlatan%20ibrahimovic&cd22=1&cd23=1&cd24=1&cd25=0&cd26=0&cd30=portrait&cd33=1&cd34=1&cd42=standard-article&cd48=1&cd50=23%3A03&cd51=sport&cg1=sport&cd52=fotboll&cg2=fotboll&cg5=article&cd56=1&cd60=zlatans%20dolda%20bolag%20i%20sverige&cd72=expressen&cd78=infinity&cd79=n%2Fa&cd82=n%2Fa&cd81=1&cd35=video%20content&cd49=har%20ar%20zlatans%20hemliga%20bolag&z=414077281'
-        }
-      },
-      response: {
-        status: 200
-      }
-    }]
-
+    const requests = require('./mockRequests')
     requests.forEach((r, i) => {
       setTimeout(() => this.onRequest(r), 1000 * i)
     })
-
   }
 }
 export default new Analyzer()

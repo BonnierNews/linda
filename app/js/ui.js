@@ -1,32 +1,23 @@
-import {mount, el} from 'redom'
+import {mount} from 'redom'
 import accordion from './accordion.js'
 import analyzer from './analyzer.js'
 
-class Settings {
-  constructor() {
-    this.refreshCheckbox = el('div.form-check',
-      el('label.form-check-label',
-        el('input#refreshCheckbox.form-check-input', {
-          type: 'checkbox',
-          value: '',
-          checked: true
-        }),
-        'Reload on refresh/href update'
-      ))
-
-    this.clearBtn = el('button.btn.btn-primary', 'Clear', {
-      type: 'button',
-      onclick: () => analyzer.reset()
-    })
-
-    this.el = el('div.settings', this.refreshCheckbox, this.clearBtn)
-  }
-}
-
 const app = document.getElementById('App')
-
-mount(app, new Settings())
 mount(app, accordion)
+
+const gaCheckbox = document.getElementById('gaCheckbox')
+gaCheckbox.onclick = (obj) => analyzer.filterType(obj)
+
+const mmsCheckbox = document.getElementById('mmsCheckbox')
+mmsCheckbox.onclick = (obj) => analyzer.filterType(obj)
+
+const clearBtn = document.getElementById('ClearBtn')
+clearBtn.onclick = () => analyzer.reset()
+
+const filterBox = document.getElementById('qBox')
+filterBox.oninput = ({target}) => {
+  analyzer.setFilterText(target.value.trim())
+}
 
 export function updateRows(rows) {
   accordion.update(rows)

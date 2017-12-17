@@ -9,6 +9,31 @@
   </head>
   <body>
     <div id="App" class="app">
+      <div class="settings">
+        <fieldset>
+          <div>
+            <input type="checkbox" id="gaCheckbox" name="GA" checked>
+            <label for="gaCheckbox">GA</label>
+          </div>
+          <div>
+            <input type="checkbox" id="mmsCheckbox" name="MMS" checked>
+            <label for="mmsCheckbox">MMS</label>
+          </div>
+        </fieldset>
+
+        <form class="filter">
+          <div>
+            <input type="search" id="qBox" name="qBox" placeholder="Ex: cd60">
+          </div>
+        </form>
+
+        <div>
+          <input type="checkbox" id="refreshCheckbox" name="" value="">
+          <label for="music">Reload on refresh/href update</label>
+        </div>
+
+        <button id="ClearBtn" class="btn btn-primary" type="button">Clear</button>
+      </div>
     </div>
     <script src="./gen/bundle.js"></script>
   </body>

@@ -31,9 +31,9 @@ class Card {
     ++index
   }
 
-  update ({short, long}) {
-    this.textLink.textContent = short
-    this.cardBodyTable.update(long)
+  update ({summary, details}) {
+    this.textLink.textContent = summary
+    this.cardBodyTable.update(details)
   }
 }
 
