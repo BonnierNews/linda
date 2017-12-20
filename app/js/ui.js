@@ -5,11 +5,15 @@ import analyzer from './analyzer.js'
 const app = document.getElementById('App')
 mount(app, accordion)
 
-const gaCheckbox = document.getElementById('gaCheckbox')
-gaCheckbox.onclick = (obj) => analyzer.filterType(obj)
+const trackerBoxes = [
+  document.getElementById('gaCheckbox'),
+  document.getElementById('mmsCheckbox'),
+  document.getElementById('sifoCheckbox')
+]
 
-const mmsCheckbox = document.getElementById('mmsCheckbox')
-mmsCheckbox.onclick = (obj) => analyzer.filterType(obj)
+trackerBoxes.forEach((trackerBox) => {
+  trackerBox.onclick = (obj) => analyzer.filterType(obj)
+})
 
 const clearBtn = document.getElementById('ClearBtn')
 clearBtn.onclick = () => analyzer.reset()

@@ -101,6 +101,11 @@ class Analyzer {
       const props = pick(searchParams, ['t', 'ec', 'ea', 'cd35', 'el'])
       const summary = `${type} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
+    } else if (url.match(/https:\/\/trafficgateway.research-int.se\//)) {
+      const type = 'SIFO'
+      const props = pick(searchParams, ['cp'])
+      const summary = `${type} ${props.join(':')}`
+      this.newMessage({type, summary, status, searchParamsList})
     }
   }
 
