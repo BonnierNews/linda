@@ -23,6 +23,14 @@ filterBox.oninput = ({target}) => {
   analyzer.setFilterText(target.value.trim())
 }
 
+
+filterBox.onkeypress = (event) => {
+  if (event.keyCode == 10 || event.keyCode == 13) {
+    event.preventDefault()
+  }
+}
+
+
 export function updateRows(rows) {
   accordion.update(rows)
 }
