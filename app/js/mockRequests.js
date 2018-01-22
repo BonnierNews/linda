@@ -34,7 +34,15 @@ const requests = [{
   response: {
     status: 302
   }
-},
-]
+}, {
+  request: {
+    method: 'GET',
+    url:   'https://sb.scorecardresearch.com/p?c1=2&c2=24459705&ns_site=total&ns_ap_pn=js&ns_ap_pfm=html&ns_type=hidden&ns_st_sv=6.1.1.171219&ns_st_pv=3.4.1.171220&ns_st_smv=5.8&ns_st_it=c&ns_st_id=1516636593176&ns_st_ec=5&ns_st_sp=1&ns_st_sc=1&ns_st_psq=3&ns_st_asq=2&ns_st_sq=2&ns_st_ppc=1&ns_st_apc=1&ns_st_spc=1&ns_st_cn=1&ns_st_ev=play&ns_st_po=45664&ns_st_cl=49963&ns_st_mp=html5&ns_st_mv=1.0&ns_st_pn=1&ns_st_tp=1&ns_st_ci=8443493&ns_st_pt=45241&ns_st_dpt=0&ns_st_ipt=0&ns_st_et=62342&ns_st_det=17101&ns_st_upc=45664&ns_st_dupc=149&ns_st_iupc=149&ns_st_upa=45664&ns_st_dupa=149&ns_st_iupa=149&ns_st_lpc=45664&ns_st_dlpc=149&ns_st_lpa=45664&ns_st_dlpa=149&ns_st_pa=45299&ns_ts=1516636657222&ns_st_bc=0&ns_st_dbc=0&ns_st_bt=379&ns_st_dbt=8&ns_st_bp=946&ns_st_skc=0&ns_st_dskc=0&ns_st_ska=0&ns_st_dska=0&ns_st_skd=0&ns_st_skt=0&ns_st_dskt=0&ns_st_pc=1&ns_st_dpc=0&ns_st_pp=1&ns_st_br=1423317&ns_st_rt=100&ns_st_ub=0&ns_st_vo=100&ns_st_ws=norm&ns_st_ki=1200000&ns_st_pr=*null&ns_st_sn=*null&ns_st_en=*null&ns_st_ep=*null&ns_st_ty=video&ns_st_ct=*null&ns_st_st=portalen&ns_st_dt=2018-01-21&ns_st_tm=21%3A35&ns_st_pu=*null&c3=*null&c4=*null&c6=*null&c7=https%3A%2F%2Fwww-livedata.expressen.se%2Fnyheter%2Fbrottscentralen%2Fde-kopplas-till-mordet-pa-arkefienden-i-gangkriget%2F&c8=De%20kopplas%20till%20mordet%20p%C3%A5%20%C3%A4rkefienden%20i%20g%C3%A4ngkriget%20%7C%20Brottscentralen%20%7C%20Expressen&c9=https%3A%2F%2Fwww-livedata.expressen.se%2F',
+  },
+  response: {
+    status: 200
+  }
+
+}]
 
 module.exports = requests
