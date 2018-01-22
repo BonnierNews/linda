@@ -25,7 +25,8 @@ class Analyzer {
   }
 
   updateUi() {
-    updateRows(this.filterMessages())
+    const messages = this.filterMessages()
+    updateRows(messages.map(o => Object.assign({}, o, {filterText: this.filterText})))
   }
 
   filterMessages() {
@@ -84,7 +85,6 @@ class Analyzer {
   }
 
   handleRequest(_request) {
-    log('onRequestFinished', _request)
     const {request, response} = _request
     const url = request.url
     const searchParams = getSearchParams(request)
@@ -93,6 +93,10 @@ class Analyzer {
 
     if (url.match(/\.scorecardresearch\.com/)) {
       const type = 'MMS'
+      // ns_st_ty = video, advertisement  // type
+      // ns_st_ev = play, pause,end, hb (event type), MMS sends itself listening after video
+      // ns_st_ad =	preroll, postroll
+
       const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
       const summary = `${type} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})

@@ -10,14 +10,27 @@ class Td {
   }
 }
 
-const Tr = list.extend('tr', Td)
+class Tr {
+  constructor (opts) {
+    this.el = el('tr', opts)
+    this.list = list(this.el, Td)
+  }
+  update ({columns, filterText}) {
+    this.list.update(columns)
+    if (filterText && columns.join('=').match(new RegExp(filterText, 'i'))) {
+      this.el.classList.add('highlight')
+    } else {
+      this.el.classList.remove('highlight')
+    }
+  }
+}
 
 class Table {
   constructor(opts) {
     this.el = list(el('table', opts), Tr)
   }
-  update(rows) {
-    this.el.update(rows)
+  update({rows, filterText}) {
+    this.el.update(rows.map(columns => ({columns, filterText})))
   }
 }
 

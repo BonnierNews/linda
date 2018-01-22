@@ -31,8 +31,8 @@ filterBox.onkeypress = (event) => {
 }
 
 
-export function updateRows(rows) {
-  accordion.update(rows)
+export function updateRows(...args) {
+  accordion.update(...args)
 }
 
 export function isRefreshChecked() {

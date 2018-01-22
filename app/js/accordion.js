@@ -31,9 +31,9 @@ class Card {
     ++index
   }
 
-  update ({summary, details}) {
+  update ({summary, details, filterText}) {
     this.textLink.textContent = summary
-    this.cardBodyTable.update(details)
+    this.cardBodyTable.update({rows: details, filterText})
   }
 }
 
@@ -42,8 +42,8 @@ class Accordion {
     this.el = list(el(`div#${parentId}`, {role: 'tablist'}), Card)
   }
   update(rows) {
-    //Do not show more that 250 due to performance
-    this.el.update(rows.slice(0, 250))
+    //Do not show more that 500 due to performance
+    this.el.update(rows.slice(0, 500))
   }
 }
 
