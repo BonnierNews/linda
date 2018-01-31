@@ -29,6 +29,14 @@ const requests = [{
 }, {
   request: {
     method: 'GET',
+    url: 'http://trafficgateway.research-int.se/TrafficCollector?rnr=1586010&siteId=d0909b11-2e34-4975-af83-c149b61a1f0a&clientId=12164f3d-edc4-44df-a835-0818d5ec47a4&cv=null&cp=%2Fstream%2Fnoje&mst=0&topLoc=https%3A%2F%2Fwww.expressen.se%2Fnoje%2Fsa-luras-tv-tittarna-av-mandelmanns%2F&referrer=http%3A%2F%2Fwww.expressen.se%2F&wh=689&ww=538',
+  },
+  response: {
+    status: 302
+  }
+},{
+  request: {
+    method: 'GET',
     url: 'https://trafficgateway.research-int.se/TrafficCollector?rnr=1586010&siteId=d0909b11-2e34-4975-af83-c149b61a1f0a&clientId=12164f3d-edc4-44df-a835-0818d5ec47a4&cv=null&cp=%2Fstream%2Fnoje&mst=0&topLoc=https%3A%2F%2Fwww.expressen.se%2Fnoje%2Fsa-luras-tv-tittarna-av-mandelmanns%2F&referrer=https%3A%2F%2Fwww.expressen.se%2F&wh=689&ww=538',
   },
   response: {
