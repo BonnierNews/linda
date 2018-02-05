@@ -9,4 +9,5 @@ Download the latest release from https://github.com/doganyazar/linda/releases, u
 chrome://extensions/
 
 ## Release (for developers - to create own version)
-Update the version in manifest.json and run ./release.js. It will create a tar.gz file.
+Update the version in manifest.json and run ./release.js. It will create a tar.gz file. 
+Then draft a new release here (https://github.com/doganyazar/linda/releases) and attach the created tar.gz file. 
