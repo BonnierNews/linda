@@ -45,3 +45,6 @@ jspm_packages
 
 # IntelliJ
 .idea
+
+# Vim swap files
+.*.sw[a-z]
