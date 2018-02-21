@@ -30,6 +30,15 @@ filterBox.onkeypress = (event) => {
   }
 }
 
+const onlyMatchedCheckbox = document.querySelector('#onlyMatchedCheckbox')
+onlyMatchedCheckbox.addEventListener('click', (event) => {
+  analyzer.updateUi()
+
+  if (!event.target.checked) {
+    document.querySelectorAll('.collapse').forEach(i => i.classList.remove('show'))
+  }
+})
+
 
 export function updateRows(...args) {
   accordion.update(...args)
@@ -37,4 +46,8 @@ export function updateRows(...args) {
 
 export function isRefreshChecked() {
   return document.querySelector('#refreshCheckbox').checked
+}
+
+export function isOnlyMatchedChecked() {
+  return document.querySelector('#onlyMatchedCheckbox').checked
 }

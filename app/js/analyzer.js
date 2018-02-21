@@ -1,5 +1,5 @@
 import log from './logger.js'
-import {updateRows} from './ui.js'
+import {updateRows, isOnlyMatchedChecked} from './ui.js'
 
 function pick(searchParams, keys) {
   return keys.map(key => searchParams.get(key)).filter(x => !!x)
@@ -26,7 +26,10 @@ class Analyzer {
 
   updateUi() {
     const messages = this.filterMessages()
-    updateRows(messages.map(o => Object.assign({}, o, {filterText: this.filterText})))
+    updateRows(messages.map(o => Object.assign({}, o, {
+      filterText: this.filterText,
+      onlyMatched: isOnlyMatchedChecked(),
+    })))
   }
 
   filterMessages() {
@@ -37,15 +40,24 @@ class Analyzer {
       return messages
     }
 
+    function filterDetailsByText(messages, text, re) {
+      if (!isOnlyMatchedChecked()) return messages
+
+      return messages.map((_message) => {
+        const message = Object.assign({}, _message)
+        message.details = message.details.filter((detail) => detail.join('=').match(re))
+        return message
+      })
+    }
+
     function filterByText(messages, text) {
       if (!text) {
         return messages
       }
 
       const re = new RegExp(text, 'i')
-      return messages.filter((message) => {
-        return message.type.match(re) ||
-          message.searchParamsList.some((searchParamPair) => searchParamPair.join('=').match(re))
+      return filterDetailsByText(messages, text, re).filter((message) => {
+        return message.details.length > 0 && message.searchParamsList.some((searchParamPair) => searchParamPair.join('=').match(re))
       })
     }
 
