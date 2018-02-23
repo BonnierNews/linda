@@ -1,17 +1,23 @@
 .app {
-    max-width: 760px;
-    margin: 0 auto;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.card {
+  margin-bottom: 1px;
 }
 
 .card-header {
   padding: .25rem 1.25rem;
+  border-bottom: 0;
 }
 
 .card-body {
   padding: 5px 10px;
   font-size: 0.8em;
   max-height: 300px; /*height and overflow provides the scrollable table*/
-  overflow: scroll;
+  overflow-y: scroll;
+  border-top: 1px solid #ddd;
 }
 
 input[type="search"] {
@@ -37,8 +43,29 @@ input[type="search"]::-webkit-search-cancel-button {
   margin-right: 5px;
 }
 
-.highlight {
-  background: #ddd;
+table {
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: hsla(0, 0%, 97%, 1);
+  border-width: 1px 0;
+}
+
+.highlight td {
+  background: #fff7b3;
+}
+
+td {
+  padding: 0 7px;
+}
+
+td:first-of-type {
+  width: 1px; /* Force cell to be as small as possible */
+}
+
+td + td {
+  border-left: 1px solid #e3e3e3;
 }
 
 label {
