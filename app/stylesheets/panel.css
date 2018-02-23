@@ -52,8 +52,12 @@ tr:nth-child(even) {
   border-width: 1px 0;
 }
 
-.highlight td {
-  background: #fff7b3;
+tr.highlight:nth-of-type(even) {
+    background-color: #fff7b3;
+}
+
+tr.highlight {
+    background-color: #feffb3;
 }
 
 td {
