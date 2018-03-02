@@ -92,3 +92,8 @@ td:first-of-type {
 td + td {
   border-left: 1px solid #e3e3e3;
 }
+
+.tracker-type {
+  width: 50px;
+  display: inline-block;
+}

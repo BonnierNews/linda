@@ -110,17 +110,17 @@ class Analyzer {
       // ns_st_ad =	preroll, postroll
 
       const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
-      const summary = `${type} ${props.join(':')}`
+      const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
       const type = 'GA'
       const props = pick(searchParams, ['t', 'ec', 'ea', 'cd35', 'el'])
-      const summary = `${type} ${props.join(':')}`
+      const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       const type = 'SIFO'
       const props = pick(searchParams, ['cp'])
-      const summary = `${type} ${props.join(':')}`
+      const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
     } else if (url.match(/https?:\/\/..\.lp4\.io\//)) {
       const type = 'LP'
@@ -147,9 +147,13 @@ class Analyzer {
           props.unshift('video')
           break
       }
-      const summary = `${type} ${props.join(':')}`
+      const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
     }
+  }
+
+  renderType(type) {
+    return `<span class="tracker-type">${type}</span>`
   }
 
   onRequest(request) {

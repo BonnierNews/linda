@@ -32,7 +32,7 @@ class Card {
   }
 
   update ({summary, details, filterText, onlyMatched}) {
-    this.textLink.textContent = summary
+    this.textLink.innerHTML = summary
     this.cardBodyTable.update({rows: details, filterText, onlyMatched})
     if (onlyMatched) {
       this.collapse.classList.add('show')
