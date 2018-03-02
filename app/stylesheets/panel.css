@@ -57,6 +57,7 @@ label {
   flex-wrap: wrap;
   margin: 5px 5px;
   align-items: baseline;
+  user-select: none
 }
 
 .settings-child {

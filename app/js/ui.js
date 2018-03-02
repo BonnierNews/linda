@@ -5,15 +5,29 @@ import analyzer from './analyzer.js'
 const app = document.getElementById('App')
 mount(app, accordion)
 
-const trackerBoxes = [
+const trackerLabels = [
   document.getElementById('gaCheckbox'),
   document.getElementById('mmsCheckbox'),
   document.getElementById('sifoCheckbox'),
   document.getElementById('linkpulseCheckbox'),
 ]
 
-trackerBoxes.forEach((trackerBox) => {
-  trackerBox.onclick = (obj) => analyzer.filterType(obj)
+trackerLabels.forEach((label) => {
+  label.onclick = (event) => {
+    const checkBox = event.target.type === 'checkbox' ? event.target : event.target.getElementsByTagName('input')[0]
+
+    if (event.shiftKey) {
+      trackerLabels.forEach((_tracker) => {
+        _tracker.getElementsByTagName('input')[0].checked = false
+      })
+
+      checkBox.checked = true
+
+      analyzer.filterOnlyType(trackerLabels, checkBox)
+    } else {
+      analyzer.filterType(checkBox)
+    }
+  }
 })
 
 const clearBtn = document.getElementById('ClearBtn')

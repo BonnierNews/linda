@@ -75,13 +75,25 @@ class Analyzer {
     this.updateUi()
   }
 
-  filterType({target}) {
-    const {name, checked} = target
+  filterType({name, checked}) {
     if (checked) {
       this.typesToFilter.delete(name)
     } else {
       this.typesToFilter.add(name)
     }
+    this.updateUi()
+  }
+
+  filterOnlyType(trackerLabels, {name}) {
+    this.typesToFilter.clear()
+    trackerLabels.forEach((label) => {
+      const filterName = label.getElementsByTagName('input')[0].name
+
+      if (filterName !== name) {
+        this.typesToFilter.add(filterName)
+      }
+    })
+
     this.updateUi()
   }
 
