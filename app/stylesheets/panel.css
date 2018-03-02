@@ -97,3 +97,18 @@ td + td {
   width: 50px;
   display: inline-block;
 }
+
+a {
+  display: block;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: none;
+  color: darkgoldenrod;
+}
+
+.card-header:hover {
+  background-color: floralwhite;
+}

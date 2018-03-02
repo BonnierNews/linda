@@ -10,17 +10,14 @@ class Card {
     const collapseIndex = `collapse${index}`
 
     this.el = el('div.card',
-      this.header = el('div.card-header', { role: 'tab', id: cardHeaderIndex},
-        el('h6.mb-0',
-          this.textLink =
-            el('a',
-              {'data-toggle':'collapse',
-                href: `#${collapseIndex}`,
-                'aria-expanded': 'true',
-                'aria-controls': collapseIndex}
-            )
-        )
-      ),
+      this.textLink = el('a.card-header', {
+        role: 'tab',
+        id: cardHeaderIndex,
+        'data-toggle':'collapse',
+        href: `#${collapseIndex}`,
+        'aria-expanded': 'true',
+        'aria-controls': collapseIndex
+      }),
       this.collapse =
         el(`div#${collapseIndex}.collapse`, {role: 'tabpanel', 'aria-labelledby': cardHeaderIndex, 'data-parent': `#${parentId}`},
           el('div.card-body',
