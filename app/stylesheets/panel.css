@@ -20,15 +20,36 @@
   border-top: 1px solid #ddd;
 }
 
-input[type="search"] {
+#qBox {
+  width: 100px;
+  margin-left: 4px;
+  padding: 0 3px;
   border-radius: 8px;
   border: 2px solid gray;
   vertical-align: middle;
-  padding: 0 3px;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
+#qBox::-webkit-search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
+}
+
+input[type="checkbox"] {
+  margin-right: 4px;
+}
+
+label {
+  margin: 0;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.filter-label {
+  margin-right: 0;
+}
+
+#ClearBtn {
+  margin-left: 10px;
 }
 
 .settings {
@@ -70,13 +91,4 @@ td:first-of-type {
 
 td + td {
   border-left: 1px solid #e3e3e3;
-}
-
-label {
-  margin: 0;
-  vertical-align: middle;
-}
-
-input + label {
-  margin-right: 10px;
 }

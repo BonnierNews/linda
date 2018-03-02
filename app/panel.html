@@ -12,27 +12,44 @@
       <div class="settings">
 
         <fieldset class="settings-child">
-          <input type="checkbox" id="gaCheckbox" name="GA" checked>
-          <label for="gaCheckbox">GA</label>
+          <label>
+            <input type="checkbox" id="gaCheckbox" name="GA" checked>
+            GA
+          </label>
 
-          <input type="checkbox" id="mmsCheckbox" name="MMS" checked>
-          <label for="mmsCheckbox">MMS</label>
+          <label>
+            <input type="checkbox" id="mmsCheckbox" name="MMS" checked>
+            MMS
+          </label>
 
-          <input type="checkbox" id="sifoCheckbox" name="SIFO" checked>
-          <label for="sifoCheckbox">SIFO</label>
+          <label>
+            <input type="checkbox" id="sifoCheckbox" name="SIFO" checked>
+            SIFO
+          </label>
+
+          <label>
+            <input type="checkbox" id="linkpulseCheckbox" name="LP" checked>
+            LP
+          </label>
         </fieldset>
 
         <fieldset class="settings-child">
-            <label for="qBox">Filter:</label>
-            <input type="search" id="qBox" name="qBox" placeholder="Ex: cd60">
+            <label class="filter-label">
+              Filter:
+              <input type="search" id="qBox" name="qBox" placeholder="Ex: cd60">
+            </label>
 
-            <input type="checkbox" id="onlyMatchedCheckbox">
-            <label for="onlyMatchedCheckbox">Only matched</label>
+            <label>
+              <input type="checkbox" id="onlyMatchedCheckbox">
+              Only matched
+            </label>
         </fieldset>
 
         <fieldset class="settings-child">
-          <input type="checkbox" id="refreshCheckbox">
-          <label for="refreshCheckbox">Auto-clear</label>
+          <label>
+            <input type="checkbox" id="refreshCheckbox">
+            Auto-clear
+          </label>
 
           <button id="ClearBtn" class="btn btn-sm btn-primary" type="button">Clear</button>
         </fieldset>

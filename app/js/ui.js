@@ -8,7 +8,8 @@ mount(app, accordion)
 const trackerBoxes = [
   document.getElementById('gaCheckbox'),
   document.getElementById('mmsCheckbox'),
-  document.getElementById('sifoCheckbox')
+  document.getElementById('sifoCheckbox'),
+  document.getElementById('linkpulseCheckbox'),
 ]
 
 trackerBoxes.forEach((trackerBox) => {
