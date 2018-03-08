@@ -109,6 +109,7 @@ class Analyzer {
   }
 
   handleRequest(_request) {
+    console.log(_request) // eslint-disable-line no-console
     const {request, response} = _request
     const url = request.url
     const searchParams = getSearchParams(request)
@@ -117,9 +118,11 @@ class Analyzer {
 
     if (url.match(/\.scorecardresearch\.com/)) {
       const type = 'MMS'
-      // ns_st_ty = video, advertisement  // type
-      // ns_st_ev = play, pause,end, hb (event type), MMS sends itself listening after video
-      // ns_st_ad =	preroll, postroll
+      if (status !== 200) return
+
+      // ns_st_ty = type        – video, advertisement
+      // ns_st_ev = event type  – play, pause, end, hb. MMS sends itself listening after video
+      // ns_st_ad =	ad type     – preroll, postroll
 
       const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
       const summary = `${this.renderType(type)} ${props.join(':')}`
@@ -187,7 +190,7 @@ class Analyzer {
   _mock() {
     const requests = require('./mockRequests')
     requests.forEach((r, i) => {
-      setTimeout(() => this.onRequest(r), 1000 * i)
+      setTimeout(() => this.onRequest(r), (1000 * i) - (i * i * 50))
     })
   }
 }
