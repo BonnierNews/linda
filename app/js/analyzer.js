@@ -117,14 +117,19 @@ class Analyzer {
     const {status} = response
 
     if (url.match(/\.scorecardresearch\.com/)) {
-      const type = 'MMS'
       if (status !== 200) return
+      const type = 'MMS'
 
-      // ns_st_ty = type        – video, advertisement
+      // ns_st_ty = video type  – video, advertisement
       // ns_st_ev = event type  – play, pause, end, hb. MMS sends itself listening after video
       // ns_st_ad =	ad type     – preroll, postroll
 
-      const props = pick(searchParams, ['ns_st_ty', 'ns_st_ev', 'ns_st_ad', 'mms_campaignid', 'mms_customadid'])
+      const mmsAdType = searchParams.get('ns_st_ad')
+      const mmsType = searchParams.get('ns_st_ty')
+      const props = pick(searchParams, ['ns_st_ev', 'mms_campaignid', 'mms_customadid'])
+
+      props.unshift(mmsAdType || mmsType)
+
       const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
