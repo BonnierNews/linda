@@ -46,8 +46,8 @@ filterBox.onkeypress = (event) => {
   }
 }
 
-const onlyMatchedCheckbox = document.querySelector('#onlyMatchedCheckbox')
-onlyMatchedCheckbox.addEventListener('click', (event) => {
+const pruneCheckbox = document.querySelector('#pruneCheckbox')
+pruneCheckbox.addEventListener('click', (event) => {
   analyzer.updateUi()
 
   if (!event.target.checked) {
@@ -64,6 +64,6 @@ export function isRefreshChecked() {
   return document.querySelector('#refreshCheckbox').checked
 }
 
-export function isOnlyMatchedChecked() {
-  return document.querySelector('#onlyMatchedCheckbox').checked
+export function isPruneChecked() {
+  return document.querySelector('#pruneCheckbox').checked
 }

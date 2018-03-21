@@ -28,10 +28,10 @@ class Card {
     ++index
   }
 
-  update ({summary, details, filterText, onlyMatched}) {
+  update ({summary, details, filterText, prune}) {
     this.textLink.innerHTML = summary
-    this.cardBodyTable.update({rows: details, filterText, onlyMatched})
-    if (onlyMatched) {
+    this.cardBodyTable.update({rows: details, filterText, prune})
+    if (prune) {
       this.collapse.classList.add('show')
     }
   }

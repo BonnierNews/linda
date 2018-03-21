@@ -1,5 +1,5 @@
 import log from './logger.js'
-import {updateRows, isOnlyMatchedChecked} from './ui.js'
+import {updateRows, isPruneChecked} from './ui.js'
 
 function pick(searchParams, keys) {
   return keys.map(key => searchParams.get(key)).filter(x => !!x)
@@ -28,7 +28,7 @@ class Analyzer {
     const messages = this.filterMessages()
     updateRows(messages.map(o => Object.assign({}, o, {
       filterText: this.filterText,
-      onlyMatched: isOnlyMatchedChecked(),
+      prune: isPruneChecked(),
     })))
   }
 
@@ -41,7 +41,7 @@ class Analyzer {
     }
 
     function filterDetailsByText(messages, text, re) {
-      if (!isOnlyMatchedChecked()) return messages
+      if (!isPruneChecked()) return messages
 
       return messages.map((_message) => {
         const message = Object.assign({}, _message)

@@ -15,9 +15,9 @@ class Tr {
     this.el = el('tr', opts)
     this.list = list(this.el, Td)
   }
-  update ({columns, filterText, onlyMatched}) {
+  update ({columns, filterText, prune}) {
     this.list.update(columns)
-    if (!onlyMatched && filterText && columns.join('=').match(new RegExp(filterText, 'i'))) {
+    if (!prune && filterText && columns.join('=').match(new RegExp(filterText, 'i'))) {
       this.el.classList.add('highlight')
     } else {
       this.el.classList.remove('highlight')
@@ -29,8 +29,8 @@ class Table {
   constructor(opts) {
     this.el = list(el('table', opts), Tr)
   }
-  update({rows, filterText, onlyMatched}) {
-    this.el.update(rows.map(columns => ({columns, filterText, onlyMatched})))
+  update({rows, filterText, prune}) {
+    this.el.update(rows.map(columns => ({columns, filterText, prune})))
   }
 }
 
