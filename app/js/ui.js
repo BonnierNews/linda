@@ -10,6 +10,7 @@ const trackerLabels = [
   document.getElementById('mmsCheckbox'),
   document.getElementById('sifoCheckbox'),
   document.getElementById('linkpulseCheckbox'),
+  document.getElementById('jtpCheckbox'),
 ]
 
 trackerLabels.forEach((label) => {

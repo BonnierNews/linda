@@ -169,6 +169,12 @@ class Analyzer {
       }
       const summary = `${this.renderType(type)} ${props.join(':')}`
       this.newMessage({type, summary, status, searchParamsList})
+    } else if (url.match(/https:\/\/jtp.expressen.se/)) {
+      const type = 'JTP'
+      const trackingType = url.slice(url.indexOf('/notify/') + 8, url.indexOf('.gif'))
+      const summary = `${this.renderType(type)} ${trackingType}`
+
+      this.newMessage({type, summary, status, searchParamsList})
     }
   }
 

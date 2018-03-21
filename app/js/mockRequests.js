@@ -17,6 +17,14 @@ const requests = [{
 }, {
   request: {
     method: 'GET',
+    url: 'https://jtp.expressen.se/notify/page-view.gif?path=/noje&channel=mobile&autorefresh=false&noscript=false',
+  },
+  response: {
+    status: 200
+  }
+}, {
+  request: {
+    method: 'GET',
     url: 'http://www.abc.com/xyz'
   },
   response: {
