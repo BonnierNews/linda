@@ -10,7 +10,6 @@
   <body>
     <div id="App" class="app">
       <div class="settings">
-
         <fieldset class="settings-child">
           <label id="gaCheckbox">
             <input type="checkbox" name="GA" checked>
@@ -32,12 +31,19 @@
             LP
           </label>
 
+          <label id="plyCheckbox">
+            <input type="checkbox" name="PLY" checked>
+            PLY
+          </label>
+
           <label id="jtpCheckbox">
             <input type="checkbox" name="JTP" checked>
             JTP
           </label>
         </fieldset>
+      </div>
 
+      <div class="settings">
         <fieldset class="settings-child">
             <label class="filter-label">
               Filter:
@@ -58,9 +64,7 @@
 
           <button id="ClearBtn" class="btn btn-sm btn-primary" type="button">Clear</button>
         </fieldset>
-
       </div>
-
     </div>
     <script src="./gen/bundle.js"></script>
   </body>
