@@ -1,6 +1,6 @@
 {
   "name": "linda",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Linda is watching!",
   "main": "index.js",
   "scripts": {

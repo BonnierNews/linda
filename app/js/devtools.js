@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('Linda', 'app/images/toolbarIcon.png', 'app/panel.html')
+chrome.devtools.panels.create('Linda', 'images/toolbarIcon.png', 'panel.html')
