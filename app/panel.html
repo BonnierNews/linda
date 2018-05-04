@@ -11,6 +11,7 @@
     <div id="App" class="app">
       <div class="settings">
         <fieldset class="settings-child">
+          <legend>Trackers</legend>
           <label id="gaCheckbox">
             <input type="checkbox" name="GA" checked>
             GA
@@ -45,18 +46,18 @@
 
       <div class="settings">
         <fieldset class="settings-child">
-            <label class="filter-label">
-              Filter:
-              <input type="search" id="qBox" name="qBox" placeholder="Ex: cd60">
-            </label>
-
+          <legend>Filter</legend>
+            <div class="input-group input-group-sm">
+              <input type="search" id="qBox" name="qBox" placeholder="Ex: cd60" class="form-control">
             <label>
               <input type="checkbox" id="pruneCheckbox">
               Prune
             </label>
+            </div>
         </fieldset>
 
         <fieldset class="settings-child">
+          <legend>Clearing</legend>
           <label>
             <input type="checkbox" id="refreshCheckbox">
             Auto-clear

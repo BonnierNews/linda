@@ -21,12 +21,7 @@
 }
 
 #qBox {
-  width: 100px;
-  margin-left: 4px;
-  padding: 0 3px;
-  border-radius: 8px;
-  border: 2px solid gray;
-  vertical-align: middle;
+  margin-right: 10px;
 }
 
 #qBox::-webkit-search-cancel-button {
@@ -42,6 +37,18 @@ label {
   margin-right: 10px;
   display: inline-flex;
   align-items: baseline;
+  line-height: 30px;
+}
+
+label:last-of-type {
+  margin-right: 0;
+}
+
+legend {
+  width: auto;
+  font-size: 10px;
+  margin: 0 -10px;
+  padding: 0 5px;
 }
 
 .filter-label {
@@ -55,14 +62,21 @@ label {
 .settings {
   display: flex;
   flex-wrap: wrap;
-  margin: 5px 5px;
+  margin: 5px 0;
   align-items: baseline;
   user-select: none
 }
 
 .settings-child {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 10px;
+  border: 1px solid #e3e3e3;
+  padding: 5px 15px;
+  padding-top: 0;
+  border-radius: 3px;
+}
+
+#accordion {
+  margin-top: 10px;
 }
 
 table {
