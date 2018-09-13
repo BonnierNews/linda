@@ -12,6 +12,7 @@ const trackerLabels = [
   document.getElementById('linkpulseCheckbox'),
   document.getElementById('jtpCheckbox'),
   document.getElementById('plyCheckbox'),
+  document.getElementById('ramCheckbox'),
 ]
 
 trackerLabels.forEach((label) => {
