@@ -21,5 +21,5 @@ Linda is a Chrome devtools extension. When installed, it creates its own panel. 
    3. Click "Load unpacked" and pick the `app` folder inside the folder that you unzipped/cloned
 
 ## Release (for developers - to create own version)
-Update the version in `manifest.json` and run `./release.js`. It will create a tar.gz file. 
-Then draft a new release here (https://github.com/ExpressenAB/linda/releases) and attach the created tar.gz file. 
+Update the version in `manifest.json` and run `./release.js`. It will create a zip file.
+Then draft a new release here (https://github.com/ExpressenAB/linda/releases) and attach the created zip file.
