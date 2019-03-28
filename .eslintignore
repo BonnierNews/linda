@@ -1,0 +1,2 @@
+app/gen/*.js
+app/vendor/**/*.js
