@@ -9,7 +9,6 @@ const trackerLabels = [
   document.getElementById("gaCheckbox"),
   document.getElementById("mmsCheckbox"),
   document.getElementById("sifoCheckbox"),
-  document.getElementById("linkpulseCheckbox"),
   document.getElementById("jtpCheckbox"),
   document.getElementById("plyCheckbox"),
   document.getElementById("ramCheckbox"),
