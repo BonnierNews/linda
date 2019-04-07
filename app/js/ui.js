@@ -40,7 +40,6 @@ filterBox.oninput = ({target}) => {
   analyzer.setFilterText(target.value.trim());
 };
 
-
 filterBox.onkeypress = (event) => {
   if (event.keyCode === 10 || event.keyCode === 13) {
     event.preventDefault();
@@ -56,6 +55,10 @@ pruneCheckbox.addEventListener("click", (event) => {
   }
 });
 
+const thirdPartyCheckbox = document.querySelector("#thirdPartyCheckbox");
+thirdPartyCheckbox.addEventListener("click", () => {
+  analyzer.updateUi();
+});
 
 export function updateRows(...args) {
   accordion.update(...args);
@@ -67,4 +70,8 @@ export function isRefreshChecked() {
 
 export function isPruneChecked() {
   return document.querySelector("#pruneCheckbox").checked;
+}
+
+export function isThirdPartyChecked() {
+  return document.querySelector("#thirdPartyCheckbox").checked;
 }
