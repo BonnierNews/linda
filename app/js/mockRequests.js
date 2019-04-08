@@ -55,14 +55,6 @@ const requests = [{
 }, {
   request: {
     method: "GET",
-    url: "https://pp.lp4.io/c?i=535a7c5fe45a1d4e46d8d7b5&p=https%3A%2F%2Fwww.expressen.se%2Fnyheter%2Fs-topparnas-utspel-vill-styra-med-centern%2F&tp=https%3A%2F%2Fwww.expressen.se%2Ftvspelare%2Fvideo%2Ftv%2Fnyheter%2Fs--c--sant%2F%3Ftopbar%3Dtrue%26startNextVideo%3Dself%26startVolume%3D0%26autoplay%3Dtrue&c=mobile&ps=video_start&co=0x0&ct=1&t=article&s=nyheter&_r=1519975340616",
-  },
-  response: {
-    status: 200
-  }
-}, {
-  request: {
-    method: "GET",
     url: "https://trafficgateway.research-int.se/TrafficCollector?rnr=1586010&siteId=d0909b11-2e34-4975-af83-c149b61a1f0a&clientId=12164f3d-edc4-44df-a835-0818d5ec47a4&cv=null&cp=%2Fstream%2Fnoje&mst=0&topLoc=https%3A%2F%2Fwww.expressen.se%2Fnoje%2Fsa-luras-tv-tittarna-av-mandelmanns%2F&referrer=https%3A%2F%2Fwww.expressen.se%2F&wh=689&ww=538",
   },
   response: {

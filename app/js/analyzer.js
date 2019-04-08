@@ -163,33 +163,6 @@ class Analyzer {
       const props = pick(searchParams, ["cp"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/https?:\/\/..\.lp4\.io\//)) {
-      const type = "LP";
-      const props = pick(searchParams, ["ps"]);
-      const path = url.match(/\/[a-z]+\?/)[0].replace(/[^a-z]/g, "");
-
-      switch (path) {
-        case "p":
-          props.unshift("pageview");
-          break;
-        case "pl":
-          props.unshift("pageload");
-          break;
-        case "c":
-          props.unshift("click");
-          break;
-        case "is":
-          props.unshift("inscreen");
-          break;
-        case "u":
-          props.unshift("unique users");
-          break;
-        case "v":
-          props.unshift("video");
-          break;
-      }
-      const summary = `${this.renderType(type)} ${props.join(":")}`;
-      this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https:\/\/jtp.expressen.se/)) {
       const type = "JTP";
       const trackingType = url.slice(url.indexOf("/notify/") + 8, url.indexOf(".gif"));
