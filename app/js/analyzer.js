@@ -1,5 +1,5 @@
 import log from "./logger.js";
-import {updateRows, isPruneChecked} from "./ui.js";
+import {updateRows, isPruneChecked, isThirdPartyChecked} from "./ui.js";
 
 function pick(searchParams, keys) {
   return keys.map((key) => searchParams.get(key)).filter((x) => !!x);
@@ -22,6 +22,7 @@ class Analyzer {
     this.messages = [];
     this.filterText = "";
     this.typesToFilter = new Set();
+    this.sites = ["https://www.expressen.se", "https://mittkok.expressen.se/", "https://www.di.se/", "https://www.dn.se/"];
   }
 
   updateUi() {
@@ -38,6 +39,26 @@ class Analyzer {
         return messages.filter(({type}) => !typesToFilter.has(type));
       }
       return messages;
+    }
+
+    function filterThirdParty(messages, sites) {
+      if (isThirdPartyChecked()) return messages;
+
+      return messages.filter((message) => {
+        if (message.type !== "GA") return true;
+
+        const searchParamsList = message.searchParamsList.reduce((obj, searchParam) => {
+          obj[searchParam[0]] = searchParam[1];
+
+          return obj;
+        }, {});
+
+        if (sites.some((site) => searchParamsList.dl && searchParamsList.dl.startsWith(site))) {
+          return true;
+        }
+
+        return false;
+      });
     }
 
     function filterDetailsByText(messages, text, re) {
@@ -62,7 +83,8 @@ class Analyzer {
     }
 
     const messagesFilteredByType = filterByType(this.messages, this.typesToFilter);
-    return filterByText(messagesFilteredByType, this.filterText);
+    const messagesFilteredByThirdParty = filterThirdParty(messagesFilteredByType, this.sites);
+    return filterByText(messagesFilteredByThirdParty, this.filterText);
   }
 
   reset() {
@@ -218,4 +240,5 @@ class Analyzer {
     });
   }
 }
+
 export default new Analyzer();
