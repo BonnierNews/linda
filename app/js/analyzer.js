@@ -145,7 +145,7 @@ class Analyzer {
       // ns_st_ev = event type  – play, pause, end, hb
       // ns_st_ad =	ad type     – preroll, midroll, postroll
 
-      const mmsAdType = searchParams.get("ns_st_ad");
+      const mmsAdType = searchParams.get("ns_st_ad") || "content";
       const mmsType = searchParams.get("ns_st_ty");
       const props = pick(searchParams, ["ns_st_ev", "mms_campaignid", "mms_customadid"]);
 
