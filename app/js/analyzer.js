@@ -174,15 +174,6 @@ class Analyzer {
       const action = pick(searchParams, ["action"])[0];
       const summary = `${this.renderType(type)} ${action}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.startsWith("https://inviso.rampanel.com/ram/Inviso")) {
-      // Example URL:
-      // https://inviso.rampanel.com/ram/Inviso?i=17254&c=80&n=ditv&t=6&cg=1&r=1&rdir=1
-      // i = Account ID maybe?
-      // n = Event label maybe?
-      const type = "RAM";
-      const event = pick(searchParams, ["n"])[0];
-      const summary = `${this.renderType(type)} ${event}`;
-      this.newMessage({type, summary, status, searchParamsList});
     }
   }
 
