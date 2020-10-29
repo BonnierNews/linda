@@ -22,7 +22,11 @@ class Analyzer {
     this.messages = [];
     this.filterText = "";
     this.typesToFilter = new Set();
-    this.sites = ["https://www.expressen.se", "https://mittkok.expressen.se/", "https://www.di.se/", "https://www.dn.se/"];
+    this.sites = [
+      /^https:\/\/[^.]+\.expressen\.se/,
+      /^https:\/\/[^.]+\.di\.se/,
+      /^https:\/\/[^.]+\.dn\.se/,
+    ];
   }
 
   updateUi() {
@@ -53,7 +57,7 @@ class Analyzer {
           return obj;
         }, {});
 
-        if (sites.some((site) => searchParamsList.dl && searchParamsList.dl.startsWith(site))) {
+        if (sites.some((site) => searchParamsList.dl && site.test(searchParamsList.dl))) {
           return true;
         }
 
@@ -153,7 +157,7 @@ class Analyzer {
 
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
+    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
       const type = "GA";
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
