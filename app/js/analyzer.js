@@ -157,7 +157,7 @@ class Analyzer {
 
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/r)?\/collect/)) {
+    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
       const type = "GA";
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;

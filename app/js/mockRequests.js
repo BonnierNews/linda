@@ -46,6 +46,18 @@ const requests = [{
   }
 }, {
   request: {
+    method: "POST",
+    url: "https://www.google-analytics.com/j/collect",
+    postData: {
+      mimeType: "text/plain;charset=UTF-8",
+      text: "v=1&_v=j86&aip=1&a=125380354&t=event&ni=1&_s=1&dl=http%3A%2F%2Flocaldev.exputv.se%3A4100%2Fdemo%2Fdiv%3Fautoplay&dp=%2Fdemo%2Fdiv%3Fautoplay&ul=en-se&de=UTF-8&dt=zlatans%20dolda%20bolag%20i%20sverige&sd=24-bit&sr=2560x1440&vp=1431x1305&je=0&ec=video&ea=start&el=all%20start&_u=aCDAAQABEAAAAC~&jid=822942505&gjid=1994289313&cid=1893868927.1601036700&tid=UA-86376213-1&_gid=1220991111.1603965851&_r=1&_slc=1&cd1=1893868927.1601036700&cd4=expressen&cd5=desktop%20web&cd6=webbtv-klipp&cd7=52d9978b-ba21-414b-b9f6-78005b6dcd98&cd8=sport%3Afotboll%3Aarticle%3Azlatans%20dolda%20bolag%20i%20sverige&cd9=0&cd10=0&cd12=2017-10-14&cd13=08%3A18&cd14=oskar%20m%C3%A5nsson&cd15=fotboll&cd16=person%2Fzlatan%20ibrahimovic&cd22=1&cd23=1&cd24=1&cd26=0&cd27=0&cd30=unavailable&cd33=1&cd34=25&cd35=video%20all&cd37=video%20on%20demand&cd39=html5&cd42=standard-article&cd43=0&cd47=96&cd48=1&cd49=har%20ar%20zlatans%20hemliga%20bolag&cd50=11%3A04&cd51=sport&cg1=sport&cd52=fotboll&cg2=fotboll&cg5=webbtv-klipp&cd56=1&cd60=zlatans%20dolda%20bolag%20i%20sverige&cd72=expressen&cd81=0&cd113=3671e954-8cc3-41d6-92c2-0922997d830a&cd73=portalen&cd74=sport&cd75=fotboll&cd94=1&cd106=16x9&cd107=normal&cm8=1&z=637334077"
+    }
+  },
+  response: {
+    status: 200
+  }
+}, {
+  request: {
     method: "GET",
     url: "http://trafficgateway.research-int.se/TrafficCollector?rnr=1586010&siteId=d0909b11-2e34-4975-af83-c149b61a1f0a&clientId=12164f3d-edc4-44df-a835-0818d5ec47a4&cv=null&cp=%2Fstream%2Fnoje&mst=0&topLoc=https%3A%2F%2Fwww.expressen.se%2Fnoje%2Fsa-luras-tv-tittarna-av-mandelmanns%2F&referrer=http%3A%2F%2Fwww.expressen.se%2F&wh=689&ww=538",
   },
