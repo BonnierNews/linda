@@ -22,7 +22,11 @@ class Analyzer {
     this.messages = [];
     this.filterText = "";
     this.typesToFilter = new Set();
-    this.sites = ["https://www.expressen.se", "https://mittkok.expressen.se/", "https://www.di.se/", "https://www.dn.se/"];
+    this.sites = [
+      /^https:\/\/[^.]+\.expressen\.se/,
+      /^https:\/\/[^.]+\.di\.se/,
+      /^https:\/\/[^.]+\.dn\.se/,
+    ];
   }
 
   updateUi() {
@@ -53,7 +57,7 @@ class Analyzer {
           return obj;
         }, {});
 
-        if (sites.some((site) => searchParamsList.dl && searchParamsList.dl.startsWith(site))) {
+        if (sites.some((site) => searchParamsList.dl && site.test(searchParamsList.dl))) {
           return true;
         }
 
