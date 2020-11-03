@@ -6,14 +6,11 @@ function pick(searchParams, keys) {
 }
 
 function getSearchParams(request) {
-  if (request.method === "GET") {
-    return new URL(request.url).searchParams;
-  }
   if (request.postData && request.postData.text) {
     return new URLSearchParams(request.postData.text);
   }
 
-  return new URLSearchParams();
+  return new URL(request.url).searchParams;
 }
 
 class Analyzer {
