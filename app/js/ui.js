@@ -14,21 +14,23 @@ const trackerLabels = [
 ];
 
 trackerLabels.forEach((label) => {
-  label.onclick = (event) => {
-    const checkBox = event.target.type === "checkbox" ? event.target : event.target.getElementsByTagName("input")[0];
+  if (label) {
+    label.onclick = (event) => {
+      const checkBox = event.target.type === "checkbox" ? event.target : event.target.getElementsByTagName("input")[0];
 
-    if (event.shiftKey) {
-      trackerLabels.forEach((_tracker) => {
-        _tracker.getElementsByTagName("input")[0].checked = false;
-      });
+      if (event.shiftKey) {
+        trackerLabels.forEach((_tracker) => {
+          _tracker.getElementsByTagName("input")[0].checked = false;
+        });
 
-      checkBox.checked = true;
+        checkBox.checked = true;
 
-      analyzer.filterOnlyType(trackerLabels, checkBox);
-    } else {
-      analyzer.filterType(checkBox);
-    }
-  };
+        analyzer.filterOnlyType(trackerLabels, checkBox);
+      } else {
+        analyzer.filterType(checkBox);
+      }
+    };
+  }
 });
 
 const clearBtn = document.getElementById("ClearBtn");
