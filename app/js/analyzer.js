@@ -20,9 +20,9 @@ class Analyzer {
     this.filterText = "";
     this.typesToFilter = new Set();
     this.sites = [
-      /^https:\/\/[^.]+\.expressen\.se/,
-      /^https:\/\/[^.]+\.di\.se/,
-      /^https:\/\/[^.]+\.dn\.se/,
+      /^http(s)*:\/\/[^.]+\.expressen\.se/,
+      /^http(s)*:\/\/[^.]+\.di\.se/,
+      /^http(s)*:\/\/[^.]+\.dn\.se/,
     ];
   }
 
