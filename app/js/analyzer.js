@@ -175,6 +175,11 @@ class Analyzer {
       const action = pick(searchParams, ["action"])[0];
       const summary = `${this.renderType(type)} ${action}`;
       this.newMessage({type, summary, status, searchParamsList});
+    } else if (url.match(/tracking\.bonnier\.news/)) {
+      const type = "REY";
+      const action = pick(searchParams, ["action"])[0];
+      const summary = `${this.renderType(type)} ${action}`;
+      this.newMessage({type, summary, status, searchParamsList});
     }
   }
 
