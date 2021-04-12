@@ -11,6 +11,7 @@ const trackerLabels = [
   document.getElementById("sifoCheckbox"),
   document.getElementById("jtpCheckbox"),
   document.getElementById("plyCheckbox"),
+  document.getElementById("reyCheckbox"),
 ];
 
 trackerLabels.forEach((label) => {
