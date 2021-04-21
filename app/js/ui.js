@@ -7,6 +7,7 @@ mount(app, accordion)
 
 const trackerLabels = [
   document.getElementById('gaCheckbox'),
+  document.getElementById('reyCheckbox'),
   document.getElementById('mmsCheckbox'),
   document.getElementById('sifoCheckbox'),
   document.getElementById('linkpulseCheckbox'),
