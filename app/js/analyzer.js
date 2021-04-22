@@ -170,9 +170,9 @@ class Analyzer {
       const summary = `${this.renderType(type)} ${trackingType}`;
 
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/pixel\.parsely\.com/)) {
+    } else if (url.match(/p\d\.parsely\.com/)) {
       const type = "PLY";
-      const action = pick(searchParams, ["action"])[0];
+      const action = searchParams.get("action");
       const summary = `${this.renderType(type)} ${action}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/tracking\.bonnier\.news/)) {
