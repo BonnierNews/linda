@@ -109,7 +109,7 @@ td + td {
 }
 
 .tracker-type {
-  width: 50px;
+  min-width: 5em;
   display: inline-block;
 }
 

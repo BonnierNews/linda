@@ -1,6 +1,6 @@
 {
   "name": "linda",
-  "version": "0.8.3",
+  "version": "0.8.6",
   "description": "Linda is watching!",
   "main": "index.js",
   "scripts": {
@@ -11,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "^4.0.0-beta.2",
-    "eslint": "^5.6.1",
-    "jquery": "^3.5.0",
-    "popper.js": "^1.12.9",
-    "redom": "^3.8.8",
-    "webpack": "^3.9.1"
+    "bootstrap": "^4.6.0",
+    "eslint": "^5.16.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
+    "redom": "^3.27.1",
+    "webpack": "^3.12.0"
   },
   "dependencies": {}
 }
