@@ -13,6 +13,10 @@ function getSearchParams(request) {
   return new URL(request.url).searchParams;
 }
 
+const ADDITIONAL_FILTERS = {
+  "REY": "REY+GA",
+};
+
 class Analyzer {
   constructor() {
     this.onRequest = this.onRequest.bind(this);
@@ -99,10 +103,19 @@ class Analyzer {
   }
 
   filterType({name, checked}) {
+    const additionalFilter = ADDITIONAL_FILTERS[name];
     if (checked) {
       this.typesToFilter.delete(name);
+
+      if (additionalFilter) {
+        this.typesToFilter.delete(additionalFilter);
+      }
     } else {
       this.typesToFilter.add(name);
+
+      if (additionalFilter) {
+        this.typesToFilter.add(additionalFilter);
+      }
     }
     this.updateUi();
   }
@@ -114,6 +127,11 @@ class Analyzer {
 
       if (filterName !== name) {
         this.typesToFilter.add(filterName);
+
+        const additionalFilter = ADDITIONAL_FILTERS[filterName];
+        if (additionalFilter) {
+          this.typesToFilter.add(additionalFilter);
+        }
       }
     });
 
