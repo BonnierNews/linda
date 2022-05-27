@@ -13,7 +13,7 @@ Linda is a Chrome devtools extension. When installed, it creates its own panel. 
 ## Install
 
 1. Get the extension
-   * Either download the prebuilt release from https://github.com/ExpressenAB/linda/releases and unzip it
+   * Either download the prebuilt release from https://github.com/BonnierNews/linda/releases and unzip it
    * Or, to make getting updates easier, clone the repo and build it using `npm ci && npm run build`
 2. Add it to Chrome
    1. Go to `chrome://extensions/`
@@ -22,4 +22,4 @@ Linda is a Chrome devtools extension. When installed, it creates its own panel. 
 
 ## Release (for developers - to create own version)
 Update the version in `manifest.json` and run `./release.js`. It will create a zip file.
-Then draft a new release here (https://github.com/ExpressenAB/linda/releases) and attach the created zip file.
+Then draft a new release here (https://github.com/BonnierNews/linda/releases) and attach the created zip file.
