@@ -6,6 +6,7 @@ const app = document.getElementById("App");
 mount(app, accordion);
 
 const trackerLabels = [
+  document.getElementById("ga4Checkbox"),
   document.getElementById("gaCheckbox"),
   document.getElementById("mmsCheckbox"),
   document.getElementById("sifoCheckbox"),

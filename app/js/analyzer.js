@@ -156,20 +156,9 @@ class Analyzer {
     const searchParamsList = Array.from(searchParams.entries());
     const {status} = response;
 
-    if (url.match(/\.scorecardresearch\.com/)) {
-      if (status !== 200) return;
-      const type = "MMS";
-
-      // ns_st_ty = video type  – video, advertisement
-      // ns_st_ev = event type  – play, pause, end, hb
-      // ns_st_ad =	ad type     – preroll, midroll, postroll
-
-      const mmsAdType = searchParams.get("ns_st_ad") || "content";
-      const mmsType = searchParams.get("ns_st_ty");
-      const props = pick(searchParams, ["ns_st_ev", "mms_campaignid", "mms_customadid"]);
-
-      props.unshift(mmsAdType || mmsType);
-
+    if (url.match(/tracking\.expressen\.se\/g\/collect/)) {
+      const type = "GA4";
+      const props = pick(searchParams, ["en"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
@@ -177,21 +166,32 @@ class Analyzer {
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
+    } else if (url.match(/\.scorecardresearch\.com/)) {
+      if (status !== 200) return;
+      const type = "MMS";
+      // ns_st_ty = video type  – video, advertisement
+      // ns_st_ev = event type  – play, pause, end, hb
+      // ns_st_ad =	ad type     – preroll, midroll, postroll
+      const mmsAdType = searchParams.get("ns_st_ad") || "content";
+      const mmsType = searchParams.get("ns_st_ty");
+      const props = pick(searchParams, ["ns_st_ev", "mms_campaignid", "mms_customadid"]);
+      props.unshift(mmsAdType || mmsType);
+      const summary = `${this.renderType(type)} ${props.join(":")}`;
+      this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       const type = "SIFO";
       const props = pick(searchParams, ["cp"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/https:\/\/jtp.expressen.se/)) {
-      const type = "JTP";
-      const trackingType = url.slice(url.indexOf("/notify/") + 8, url.indexOf(".gif"));
-      const summary = `${this.renderType(type)} ${trackingType}`;
-
-      this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/p\d\.parsely\.com/)) {
       const type = "PLY";
       const action = searchParams.get("action");
       const summary = `${this.renderType(type)} ${action}`;
+      this.newMessage({type, summary, status, searchParamsList});
+    } else if (url.match(/https:\/\/jtp.expressen.se/)) {
+      const type = "JTP";
+      const trackingType = url.slice(url.indexOf("/notify/") + 8, url.indexOf(".gif"));
+      const summary = `${this.renderType(type)} ${trackingType}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/tracking\.bonnier\.news/)) {
       let type = "REY";
