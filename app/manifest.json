@@ -1,6 +1,6 @@
 {
   "name": "Linda",
-  "version": "0.8.7",
+  "version": "0.10.0",
   "manifest_version": 3,
   "description": "Linda is watching!",
   "devtools_page": "devtools.html",
