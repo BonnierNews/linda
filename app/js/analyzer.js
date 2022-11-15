@@ -142,7 +142,7 @@ class Analyzer {
     this.messages.push({
       type,
       searchParamsList,
-      // short and long processed here to send to accordion ui directly
+      // short and long processed here to send to accordion UI directly
       summary,
       details: searchParamsList
     });
@@ -157,18 +157,21 @@ class Analyzer {
     const {status} = response;
 
     if (url.match(/\/collect/) && searchParams.get("v") === "2") {
+      // Google Analytics Version 4
       const type = "GA4";
       const props = pick(searchParams, ["en"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
+      // Google Analytycs
       const type = "GA";
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/\.scorecardresearch\.com/)) {
-      if (status !== 200) return;
-      const type = "MMS";
+      // Comscore
+      if (status !== 200) return; // Do not log redirects
+      const type = "MMS:C";
       // ns_st_ty = video type  – video, advertisement
       // ns_st_ev = event type  – play, pause, end, hb
       // ns_st_ad =	ad type     – preroll, midroll, postroll
@@ -178,22 +181,34 @@ class Analyzer {
       props.unshift(mmsAdType || mmsType);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
+    } else if (url.match(/ttps:\/\/secure-sw.imrworldwide.com\/cgi-bin\/gn/)) {
+      // Nielsen
+      const type = "MMS:N";
+      const [at] = pick(searchParams, ["at"]);
+      const props = pick(searchParams, ["ad_type"]);
+      props.unshift(at || "loadMetaData");
+      const summary = `${this.renderType(type)} ${props.join(":")}`;
+      this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
+      // SIFO
       const type = "SIFO";
       const props = pick(searchParams, ["cp"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/p\d\.parsely\.com/)) {
+      // Parsely
       const type = "PLY";
       const action = searchParams.get("action");
       const summary = `${this.renderType(type)} ${action}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https:\/\/jtp.expressen.se/)) {
+      // JTP – Joel's Tracking Pixel
       const type = "JTP";
       const trackingType = url.slice(url.indexOf("/notify/") + 8, url.indexOf(".gif"));
       const summary = `${this.renderType(type)} ${trackingType}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/tracking\.bonnier\.news/)) {
+      // Reynolds (and perhaps Google Analytics)
       let type = "REY";
       if (searchParams.get("send_to_ga") === "true") {
         type += "+GA";
