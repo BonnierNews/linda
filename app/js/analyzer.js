@@ -157,7 +157,6 @@ class Analyzer {
     const {status} = response;
 
     if (url.match(/\/collect/) && searchParams.get("v") === "2") {
-      // searchParams contains
       const type = "GA4";
       const props = pick(searchParams, ["en"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
