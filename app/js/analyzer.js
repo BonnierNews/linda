@@ -156,7 +156,8 @@ class Analyzer {
     const searchParamsList = Array.from(searchParams.entries());
     const {status} = response;
 
-    if (url.match(/tracking\.expressen\.se\/g\/collect/)) {
+    if (url.match(/\/collect/) && searchParams.get("v") === "2") {
+      // searchParams contains
       const type = "GA4";
       const props = pick(searchParams, ["en"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
