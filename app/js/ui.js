@@ -8,6 +8,7 @@ mount(app, accordion);
 const trackerLabels = [
   document.getElementById("ga4Checkbox"),
   document.getElementById("gaCheckbox"),
+  document.getElementById("mmsComscoreCheckbox"),
   document.getElementById("mmsCheckbox"),
   document.getElementById("sifoCheckbox"),
   document.getElementById("jtpCheckbox"),
@@ -21,8 +22,8 @@ trackerLabels.forEach((label) => {
       const checkBox = event.target.type === "checkbox" ? event.target : event.target.getElementsByTagName("input")[0];
 
       if (event.shiftKey) {
-        trackerLabels.forEach((_tracker) => {
-          _tracker.getElementsByTagName("input")[0].checked = false;
+        trackerLabels.forEach((tracker) => {
+          tracker.getElementsByTagName("input")[0].checked = false;
         });
 
         checkBox.checked = true;
@@ -36,18 +37,20 @@ trackerLabels.forEach((label) => {
 });
 
 const clearBtn = document.getElementById("ClearBtn");
-clearBtn.onclick = () => analyzer.reset();
+clearBtn.addEventListener("click", () => {
+  analyzer.reset();
+});
 
 const filterBox = document.getElementById("qBox");
-filterBox.oninput = ({target}) => {
+filterBox.addEventListener("input", ({target}) => {
   analyzer.setFilterText(target.value.trim());
-};
+});
 
-filterBox.onkeypress = (event) => {
-  if (event.keyCode === 10 || event.keyCode === 13) {
+filterBox.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
     event.preventDefault();
   }
-};
+});
 
 const pruneCheckbox = document.querySelector("#pruneCheckbox");
 pruneCheckbox.addEventListener("click", (event) => {
