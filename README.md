@@ -1,5 +1,5 @@
 # Linda
-Linda loves media tracking, especially MMS, and wants everyone to share the passion.
+Linda loves media tracking and wants everyone to share the passion.
 
 ## Details
 Linda is a Chrome devtools extension. When installed, it creates its own panel. It accesses network requests, classifies the media tracking and prints it on the panel.
@@ -7,8 +7,8 @@ Linda is a Chrome devtools extension. When installed, it creates its own panel. 
 ## Features
 - Hold `shift` and click on a checkbox to select only it.
 - `Filter` supports regex.
-- Check `Prune` to only show rows that match the `Filter` string.
-  This also expands all hits.
+- Check `Prune` to only show rows that match the `Filter` string.  
+  This also expands all hits. With no search pattern, everything is revealed.
 
 ## Install
 
