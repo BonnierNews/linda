@@ -168,27 +168,6 @@ class Analyzer {
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/\.scorecardresearch\.com/)) {
-      // Comscore
-      if (status !== 200) return; // Do not log redirects
-      const type = "MMS:C";
-      // ns_st_ty = video type  – video, advertisement
-      // ns_st_ev = event type  – play, pause, end, hb
-      // ns_st_ad =	ad type     – preroll, midroll, postroll
-      const mmsAdType = searchParams.get("ns_st_ad") || "content";
-      const mmsType = searchParams.get("ns_st_ty");
-      const props = pick(searchParams, ["ns_st_ev", "mms_campaignid", "mms_customadid"]);
-      props.unshift(mmsAdType || mmsType);
-      const summary = `${this.renderType(type)} ${props.join(":")}`;
-      this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/ttps:\/\/secure-sw.imrworldwide.com\/cgi-bin\/gn/)) {
-      // Nielsen
-      const type = "MMS:N";
-      const [at] = pick(searchParams, ["at"]);
-      const props = pick(searchParams, ["ad_type"]);
-      props.unshift(at || "loadMetaData");
-      const summary = `${this.renderType(type)} ${props.join(":")}`;
-      this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       // SIFO
       const type = "SIFO";
