@@ -1,5 +1,6 @@
 app/gen
 releases/
+dist/
 
 .DS_Store
 
