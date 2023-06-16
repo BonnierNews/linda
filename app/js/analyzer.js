@@ -66,7 +66,7 @@ class Analyzer {
       });
     }
 
-    function filterDetailsByText(messages, text, re) {
+    function filterDetailsByText(messages, _text, re) {
       if (!isPruneChecked()) return messages;
 
       return messages.map((_message) => {
@@ -163,7 +163,7 @@ class Analyzer {
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
-      // Google Analytycs
+      // Google Analytics
       const type = "GA";
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
@@ -171,9 +171,20 @@ class Analyzer {
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       // SIFO
       const type = "SIFO";
-      const props = pick(searchParams, ["cp"]);
+      const sifoData = searchParams.get("data")
+        .split("|")
+        .map((keyVal) => keyVal.split("^"));
+
+      const props = sifoData
+        .filter(([key]) => ["event", "type"].includes(key))
+        .map(([, value]) => value);
+
+      const extendedSearchParamsList = searchParamsList.concat(sifoData.map(([key, value]) => {
+        return [`__${key}`, value];
+      }));
+
       const summary = `${this.renderType(type)} ${props.join(":")}`;
-      this.newMessage({type, summary, status, searchParamsList});
+      this.newMessage({type, summary, status, searchParamsList: extendedSearchParamsList});
     } else if (url.match(/p\d\.parsely\.com/)) {
       // Parsely
       const type = "PLY";
