@@ -5,9 +5,7 @@
   "description": "Linda is watching!",
   "devtools_page": "devtools.html",
   "background": {
-    "serviceWorker": [
-      "js/background.js"
-    ]
+    "service_worker": "js/background.js"
   },
   "host_permissions": [
     "*://*/*"
