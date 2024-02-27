@@ -28,6 +28,7 @@ class Analyzer {
       /^http(s)*:\/\/[^.]+\.di\.se/,
       /^http(s)*:\/\/[^.]+\.dn\.se/,
     ];
+    log("XXX 2");
   }
 
   updateUi() {

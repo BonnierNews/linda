@@ -10,6 +10,9 @@
   "host_permissions": [
     "*://*/*"
   ],
+   "permissions": [
+    "scripting"
+  ],
   "icons": {
      "16": "images/Rails_Logo_16x16.png",
      "48": "images/Rails_Logo_48x48.png",

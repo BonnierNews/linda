@@ -24,10 +24,6 @@
   margin-right: 10px;
 }
 
-#qBox::-webkit-search-cancel-button {
-  -webkit-appearance: searchfield-cancel-button;
-}
-
 input[type="checkbox"] {
   margin-right: 4px;
 }

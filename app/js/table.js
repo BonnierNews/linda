@@ -30,6 +30,7 @@ class Table {
     this.el = list(el("table", opts), Tr);
   }
   update({rows, filterText, prune}) {
+    if (!rows) return;
     this.el.update(rows.map((columns) => ({columns, filterText, prune})));
   }
 }
