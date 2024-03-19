@@ -1,8 +1,8 @@
 import log from "./logger.js";
 import {updateRows, isPruneChecked, isThirdPartyChecked} from "./ui.js";
 
-function pick(searchParams, keys) {
-  return keys.map((key) => searchParams.get(key)).filter((x) => !!x);
+function pick(object, keys) {
+  return keys.map((key) => object.get && object.get(key) || object[key]).filter((x) => !!x);
 }
 
 function getSearchParams(request) {
@@ -11,6 +11,44 @@ function getSearchParams(request) {
   }
 
   return new URL(request.url).searchParams;
+}
+
+function getJsonPostData(request) {
+  if (request.postData && request.postData.text) {
+    try {
+      const data = JSON.parse(request.postData.text);
+      return data.map((item) => flattenObject(item));
+    } catch (error) {
+      log("Error processing JSON POST data", error);
+      return null;
+    }
+  }
+}
+
+function flattenObject(node, name = "", acc = {}) {
+  if (!node) {
+    log(`flattenObject(…) error at node "${name}"`);
+    return;
+  }
+
+  Object.keys(node).forEach((key) => {
+    const current = node[key];
+    const nodeName = name.length > 0 ? `${name}.${key}` : key;
+
+    if (typeof current === "object" && current !== null) { // typeof null === "object"
+      flattenObject(current, nodeName, acc);
+    } else {
+      let value = current;
+      if (typeof current === "string") {
+        value = `"${current}"`;
+      } else if (current === null) {
+        value = "[null]";
+      }
+      acc[nodeName] = value;
+    }
+  });
+
+  return acc;
 }
 
 const ADDITIONAL_FILTERS = {
@@ -168,6 +206,20 @@ class Analyzer {
       const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
+    } else if (url.match(/\/\/tracking\.[a-z]+\.se\//)) {
+      // Bonnier News Analytics
+      if (request.method !== "POST") return;
+
+      const type = "BNA";
+      const postData = getJsonPostData(request);
+
+      if (!postData) return;
+
+      postData.forEach((data) => {
+        const props = pick(data, ["event_name"]);
+        const summary = `${this.renderType(type)} ${props.join(":").replace(/"/g, "")}`;
+        this.newMessage({type, summary, status, searchParamsList: Object.entries(data)});
+      });
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       // SIFO
       const type = "SIFO";
