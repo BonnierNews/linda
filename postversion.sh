@@ -12,4 +12,4 @@ npm_package_version=$1
 
 sed -i "" "s/\"version\":.*,/\"version\": \"$npm_package_version\",/" app/manifest.json && \
 git commit -a --amend --no-edit > /dev/null && \
-printf "Version bumped to $npm_package_version!\n\nRemember to push tags:\n    git push --tags\n\n"
+printf "Version bumped to $npm_package_version!\n\nRemember to push tags:\n    git push && git push --tags\n\n"
