@@ -11,8 +11,9 @@
     "*://*/*"
   ],
   "icons": {
-     "16": "images/Rails_Logo_16x16.png",
-     "48": "images/Rails_Logo_48x48.png",
-    "128": "images/Rails_Logo_128x128.png"
+     "16": "images/linda-logo-16x16.png",
+     "32": "images/linda-logo-32x32.png",
+     "48": "images/linda-logo-48x48.png",
+     "128": "images/linda-logo-128x128.png"
   }
 }
