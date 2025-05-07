@@ -1,5 +1,5 @@
 import log from "./logger.js";
-import {updateRows, isPruneChecked, isThirdPartyChecked} from "./ui.js";
+import {updateRows, isPruneChecked} from "./ui.js";
 
 function pick(object, keys) {
   return keys.map((key) => object.get && object.get(key) || object[key]).filter((x) => !!x);
@@ -51,10 +51,6 @@ function flattenObject(node, name = "", acc = {}) {
   return acc;
 }
 
-const ADDITIONAL_FILTERS = {
-  "REY": "REY+GA",
-};
-
 class Analyzer {
   constructor() {
     this.onRequest = this.onRequest.bind(this);
@@ -84,26 +80,6 @@ class Analyzer {
       return messages;
     }
 
-    function filterThirdParty(messages, sites) {
-      if (isThirdPartyChecked()) return messages;
-
-      return messages.filter((message) => {
-        if (message.type !== "GA") return true;
-
-        const searchParamsList = message.searchParamsList.reduce((obj, searchParam) => {
-          obj[searchParam[0]] = searchParam[1];
-
-          return obj;
-        }, {});
-
-        if (sites.some((site) => searchParamsList.dl && site.test(searchParamsList.dl))) {
-          return true;
-        }
-
-        return false;
-      });
-    }
-
     function filterDetailsByText(messages, _text, re) {
       if (!isPruneChecked()) return messages;
 
@@ -126,8 +102,7 @@ class Analyzer {
     }
 
     const messagesFilteredByType = filterByType(this.messages, this.typesToFilter);
-    const messagesFilteredByThirdParty = filterThirdParty(messagesFilteredByType, this.sites);
-    return filterByText(messagesFilteredByThirdParty, this.filterText);
+    return filterByText(messagesFilteredByType, this.filterText);
   }
 
   reset() {
@@ -141,19 +116,10 @@ class Analyzer {
   }
 
   filterType({name, checked}) {
-    const additionalFilter = ADDITIONAL_FILTERS[name];
     if (checked) {
       this.typesToFilter.delete(name);
-
-      if (additionalFilter) {
-        this.typesToFilter.delete(additionalFilter);
-      }
     } else {
       this.typesToFilter.add(name);
-
-      if (additionalFilter) {
-        this.typesToFilter.add(additionalFilter);
-      }
     }
     this.updateUi();
   }
@@ -165,11 +131,6 @@ class Analyzer {
 
       if (filterName !== name) {
         this.typesToFilter.add(filterName);
-
-        const additionalFilter = ADDITIONAL_FILTERS[filterName];
-        if (additionalFilter) {
-          this.typesToFilter.add(additionalFilter);
-        }
       }
     });
 
@@ -198,12 +159,6 @@ class Analyzer {
       // Google Analytics Version 4
       const type = "GA4";
       const props = pick(searchParams, ["en"]);
-      const summary = `${this.renderType(type)} ${props.join(":")}`;
-      this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/https:\/\/www\.google-analytics\.com(\/[a-z])?\/collect/)) {
-      // Google Analytics
-      const type = "GA";
-      const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     } else if (url.match(/\/\/tracking\.[a-z]+\.se\//)) {
@@ -248,15 +203,6 @@ class Analyzer {
       const type = "JTP";
       const trackingType = url.slice(url.indexOf("/notify/") + 8, url.indexOf(".gif"));
       const summary = `${this.renderType(type)} ${trackingType}`;
-      this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/tracking\.bonnier\.news/)) {
-      // Reynolds (and perhaps Google Analytics)
-      let type = "REY";
-      if (searchParams.get("send_to_ga") === "true") {
-        type += "+GA";
-      }
-      const props = pick(searchParams, ["t", "ec", "ea", "cd35", "el"]);
-      const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
     }
   }
