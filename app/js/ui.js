@@ -7,12 +7,10 @@ mount(app, accordion);
 
 const trackerLabels = [
   document.getElementById("ga4Checkbox"),
-  document.getElementById("gaCheckbox"),
   document.getElementById("bnaCheckbox"),
   document.getElementById("sifoCheckbox"),
   document.getElementById("jtpCheckbox"),
   document.getElementById("plyCheckbox"),
-  document.getElementById("reyCheckbox"),
 ];
 
 trackerLabels.forEach((label) => {
@@ -60,11 +58,6 @@ pruneCheckbox.addEventListener("click", (event) => {
   }
 });
 
-const thirdPartyCheckbox = document.querySelector("#thirdPartyCheckbox");
-thirdPartyCheckbox.addEventListener("click", () => {
-  analyzer.updateUi();
-});
-
 export function updateRows(...args) {
   accordion.update(...args);
 }
@@ -75,8 +68,4 @@ export function isRefreshChecked() {
 
 export function isPruneChecked() {
   return document.querySelector("#pruneCheckbox").checked;
-}
-
-export function isThirdPartyChecked() {
-  return document.querySelector("#thirdPartyCheckbox").checked;
 }
