@@ -161,20 +161,6 @@ class Analyzer {
       const props = pick(searchParams, ["en"]);
       const summary = `${this.renderType(type)} ${props.join(":")}`;
       this.newMessage({type, summary, status, searchParamsList});
-    } else if (url.match(/\/\/tracking\.[a-z]+\.se\//)) {
-      // Bonnier News Analytics
-      if (request.method !== "POST") return;
-
-      const type = "BNA";
-      const postData = getJsonPostData(request);
-
-      if (!postData) return;
-
-      postData.forEach((data) => {
-        const props = pick(data, ["event_name"]);
-        const summary = `${this.renderType(type)} ${props.join(":").replace(/"/g, "")}`;
-        this.newMessage({type, summary, status, searchParamsList: Object.entries(data)});
-      });
     } else if (url.match(/https?:\/\/trafficgateway.research-int.se\//)) {
       // SIFO
       const type = "SIFO";
